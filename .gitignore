@@ -2,7 +2,7 @@
 
 ingest/*
 !ingest/
-!ingest/ingest.sh
+!ingest/ingest.py
 
 # macOS stuff
 **._*
