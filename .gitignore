@@ -1,0 +1,9 @@
+.sklair
+
+ingest/*
+!ingest/
+!ingest/ingest.sh
+
+# macOS stuff
+**._*
+**.DS_*

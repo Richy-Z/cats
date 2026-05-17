@@ -1,0 +1,10 @@
+{
+	"$schema": "https://github.com/numelon-oss/sklair/releases/download/v0.3.0/sklair-v0.3.0.schema.json",
+	"input": "./src",
+	"components": "./components",
+	"output": "./build",
+	"hooks": {
+		"enabled": true,
+		"path": "./hooks"
+	}
+}
