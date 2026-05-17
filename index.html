@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="theme-color" content="#f6af7f"/><title>Richy&#39;s Cats</title><link rel="icon" href="/img/cats.png"/><script src="https://wcdn.numelon.com/sklair-shared/font-awesome-6.5.2-cloudflare-cdnjs.min.js" defer=""></script>
+	<script defer="" data-domain="cats.richy.lol" src="https://plstrk.numelon.com/js/script.file-downloads.hash.outbound-links.js"></script>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background: #f0dbbf;
+			color: #111;
+			padding: 32px 20px;
+		}
+
+		.gallery {
+			column-count: 4;
+			column-gap: 14px;
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		@media (max-width: 1000px) {
+			.gallery {
+				column-count: 3;
+			}
+		}
+
+		@media (max-width: 700px) {
+			.gallery {
+				column-count: 2;
+			}
+		}
+
+		@media (max-width: 500px) {
+			.gallery {
+				column-count: 1;
+			}
+		}
+
+		.cat-card {
+			position: relative;
+			break-inside: avoid;
+			margin-bottom: 14px;
+			overflow: hidden;
+			border-radius: 6px;
+		}
+
+		.cat-card img {
+			width: 100%;
+			display: block;
+			border-radius: 6px;
+			transition: transform 0.25s ease;
+		}
+
+		.cat-card:hover img {
+			transform: scale(1.02);
+		}
+
+		.actions {
+			position: absolute;
+			left: 8px;
+			right: 8px;
+			bottom: 8px;
+
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+
+			padding: 10px;
+
+			background: rgba(255, 203, 143, 0.3);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+
+			border-radius: 6px;
+
+			opacity: 0;
+			transform: translateY(8px);
+			transition: all 0.2s ease;
+		}
+
+		.cat-card:hover .actions {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.actions a,
+		.actions button {
+			border: none;
+			background: transparent;
+			cursor: pointer;
+			color: #000000;
+			font-size: 14px;
+			text-decoration: none;
+			padding: 4px;
+		}
+
+		.actions a:hover,
+		.actions button:hover {
+			opacity: 0.6;
+		}
+	</style><meta property="og:site_name" content="Richy&#39;s Cats"/><meta name="twitter:title" content="Cats!"/><meta property="og:title" content="Cats!"/><meta name="description" content="A very necessary archive of my cats."/><meta name="twitter:description" content="A very necessary archive of my cats."/><meta property="og:description" content="A very necessary archive of my cats."/><meta name="twitter:image" content="https://cats.richy.lol/img/cats.png"/><meta property="og:image" content="https://cats.richy.lol/img/cats.png"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:url" content="https://cats.richy.lol"/><meta property="og:url" content="https://cats.richy.lol"/><meta property="og:type" content="website"/><meta name="generator" content="https://sklair.numelon.com"/></head>
+
+<body class="font-secondary">
+	
+
+
+
+	
+
+
+
+
+	
+
+	<section class="gallery" id="gallery"></section>
+
+	<template id="cat-template">
+		<div class="cat-card">
+			<img alt="cat"/>
+
+			<div class="actions">
+				<a class="edit-btn">
+					<i class="fas fa-pen"></i>
+				</a>
+
+				<a class="download-btn">
+					<i class="fas fa-download"></i>
+				</a>
+
+				<button class="copy-btn">
+					<i class="fas fa-link"></i>
+				</button>
+			</div>
+		</div>
+	</template>
+
+	<script>
+		async function cat() {
+			const gallery = document.getElementById("gallery")
+			const template = document.getElementById("cat-template")
+
+			try {
+				const response = await fetch("/_sklair/cats.json")
+				const cats = await response.json()
+
+				cats.forEach((url) => {
+					const clone = template.content.cloneNode(true)
+
+					const img = clone.querySelector("img")
+					const editBtn = clone.querySelector(".edit-btn")
+					const downloadBtn = clone.querySelector(".download-btn")
+					const copyBtn = clone.querySelector(".copy-btn")
+
+					img.src = url
+
+					editBtn.href = `/edit?url=${encodeURIComponent(url)}`
+
+					downloadBtn.href = url
+					downloadBtn.setAttribute("download", "")
+
+					copyBtn.addEventListener("click", async () => {
+						await navigator.clipboard.writeText(
+							window.location.origin + url
+						)
+					})
+
+					gallery.appendChild(clone)
+				})
+			} catch (err) {
+				console.error("failed to load cats:", err)
+			}
+		}
+
+		cat()
+	</script>
+
+
+
+</body></html>
