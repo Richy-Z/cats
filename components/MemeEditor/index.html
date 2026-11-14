@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="./editor.css">
+	<script type="module" src="./editor.js"></script>
+</head>
+
+<body>
+	<main class="editor">
+		<header class="editor-header">
+			<a id="back-link" href="/">← Back to cats</a>
+			<h1>Cat meme maker</h1>
+			<p>A very necessary caption for a very necessary cat.</p>
+		</header>
+
+		<div class="editor-layout">
+			<section class="preview-panel" aria-label="Meme preview" aria-busy="true">
+				<div class="preview-stage">
+					<p id="preview-message" role="status">Loading your cat...</p>
+					<canvas id="meme-canvas" hidden aria-label="Your cat with the current captions">Your meme preview.
+						Use the buttons to copy or download it.</canvas>
+				</div>
+				<p id="image-details" class="preview-details"></p>
+			</section>
+
+			<form class="controls" id="editor-form">
+				<fieldset id="caption-controls" aria-label="Captions" disabled>
+					<label for="top-caption" id="top-label">Top caption</label>
+					<textarea id="top-caption" rows="3" maxlength="280" placeholder="When you hear the treat bag"
+						spellcheck="true"></textarea>
+					<label for="bottom-caption">Bottom caption</label>
+					<textarea id="bottom-caption" rows="3" maxlength="280" placeholder="But it's just the recycling"
+						spellcheck="true"></textarea>
+					<label class="strip-option" for="caption-strip">
+						<input type="checkbox" id="caption-strip">
+						<span>White caption strip<span class="hint">Put the top caption above the photo.</span></span>
+					</label>
+					<div class="size-label">
+						<label for="text-size">Text size</label>
+						<output id="text-size-value" for="text-size">7%</output>
+					</div>
+					<input id="text-size" type="range" min="3" max="14" value="7" step="0.5">
+					<button class="reset-button" id="reset-button" type="button">Reset captions</button>
+				</fieldset>
+
+				<fieldset id="export-controls" disabled>
+					<legend>Export</legend>
+					<label for="download-format">Download format</label>
+					<select id="download-format">
+						<option value="gif" selected>GIF</option>
+						<option value="png">PNG</option>
+					</select>
+					<div class="export-actions">
+						<button class="copy-button" id="copy-image" type="button">Copy PNG</button>
+						<button id="download-image" type="button">Download GIF</button>
+					</div>
+				</fieldset>
+				<p id="editor-status" role="status" aria-live="polite" aria-atomic="true"></p>
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>
