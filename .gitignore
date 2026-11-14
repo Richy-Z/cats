@@ -7,3 +7,6 @@ ingest/*
 # macOS stuff
 **._*
 **.DS_*
+
+# Compiled site
+/build/

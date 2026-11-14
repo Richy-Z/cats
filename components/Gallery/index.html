@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="./gallery.css">
+	<script type="module" src="./gallery.js"></script>
+</head>
+
+<body>
+	<section class="gallery" id="gallery">
+		<script type="application/x-sklair-lua">
+			local images = { gif = true, jpg = true, jpeg = true, png = true, webp = true, avif = true }
+			
+			for _, file in ipairs(fs.scandir("project:" .. props.collection)) do
+				local extension = file.name:match("%.([^%.]+)$")
+				if not file.isDir and not file.name:match("^%.") and extension and images[extension:lower()] then
+					local filename = file.name:gsub("([^%w%-_%.~])", function(char)
+						return string.format("%%%02X", string.byte(char))
+					end)
+					sklair.component("CatCard", {
+						url = "/" .. props.collection .. "/" .. filename,
+						alt = props.alt,
+					})
+				end
+			end
+		</script>
+	</section>
+</body>
+
+</html>
